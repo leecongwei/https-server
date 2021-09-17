@@ -1,21 +1,15 @@
-var https = require('https');
-var fs = require('fs');
+var http = require('http');
 
-var options = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('cert.pem')
-};
-var a = https.createServer(options, function (req, response) {
-  response.writeHead(200, {"Content-Type": "text/html"});
-  response.write("<html>");
-  response.write('<body>');
-  response.write('<h1>');
-  response.write('Server is working');
-  response.write('</h1>');
-  response.write('</body>');
-  response.write('</html>');
-  response.write('login.html');
-  response.end();
-}).listen(8000);
+http.createServer(function (request, response) {
 
-console.log("Server running at http://127.0.0.1:8000/");
+    // 发送 HTTP 头部 
+    // HTTP 状态值: 200 : OK
+    // 内容类型: text/plain
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+
+    // 发送响应数据 "Hello World"
+    response.end('Hello World\n');
+}).listen(8888);
+
+// 终端打印如下信息
+console.log('Server running at http://127.0.0.1:8888/');
